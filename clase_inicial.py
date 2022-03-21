@@ -1,5 +1,3 @@
-import random
-
 
 #n1 = 2
 #n2 = 10
@@ -26,11 +24,11 @@ import random
 # Estructura de datos array ---> Listas
 
 
-vec = [4, 3, 5, 8, 0, 15]
+#vec = [4, 3, 5, 8, 0, 15]
 
 
 
-print(type(vec), len(vec))
+#print(type(vec), len(vec))
 
 
 
@@ -45,17 +43,21 @@ print(type(vec), len(vec))
 #for elemento in vec:
 #    print(elemento)
 
-v1 = 3
-v2 = 5
+#v1 = 3
+#v2 = 5
 
-def mi_funcion(valor1, valor2, valor3=None, *otros):
-    print('lo que haga mi funcion xD')
-    print ('lista argumentos')
-    for elemento in otros:
-        print(elemento)
+#def mi_funcion(valor1, valor2, valor3=None, *otros):
+#    print('lo que haga mi funcion xD')
+#    print ('lista argumentos')
+#    for elemento in otros:
+#        print(elemento)
 
-print(vec)
-mi_funcion(v1,v2)
+#print(vec)
+#mi_funcion(v1,v2)
 
-print(v1,v2, 76, 15, 20, 35)
+#print(v1,v2, 76, 15, 20, 35)
 
+
+from mi_modulo import suma
+
+print(suma(5, 9))
