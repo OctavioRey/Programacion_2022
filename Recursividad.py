@@ -104,4 +104,41 @@ def busqueda_secuencialMejorada(vector, buscado):
     else:
         return busqueda_secuencialMejorada(vector[:-1], buscado)
 
-print (busqueda_secuencialMejorada(Lista, 20))
+#print (busqueda_secuencialMejorada(Lista, 20))
+
+#Ejercicio 21
+
+lista_ordenada = [0, 1, 2, 3, 4, 5, 6]
+
+def busqueda_binariaR(vector, buscado, primero, ultimo):
+    med = (primero + ultimo) // 2
+
+    if (primero > ultimo):
+        return -1
+    elif(buscado == vector[med]):
+        return med
+    elif (vector[med] < buscado):
+        return busqueda_binariaR(vector, buscado, med+1, ultimo)
+    else:
+        return busqueda_binariaR(vector, buscado, primero, med-1)
+
+# print (busqueda_binariaR(lista_ordenada, 6 , 0, len(lista_ordenada) -1))
+
+
+matriz = [
+    [1, 2, 3],
+    [3, 4, 5],
+    [6, 7, 8]
+    ]
+
+#for i in range(3):
+#    for j in range(3):
+#        print (matriz[i][j])
+
+for i in range(3):
+    print (matriz[i])
+
+
+ 
+
+
