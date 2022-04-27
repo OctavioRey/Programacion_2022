@@ -65,14 +65,14 @@ class Cola():
 
 c = Cola()
 
-from random import randint
+# from random import randint
 
-for i in range(10):
-    c.arribo(randint(0,100))
+# for i in range(10):
+#     c.arribo(randint(0,100))
 
-for i in range(c.tamanio()):
-    print (c.mover_al_final())
+# for i in range(c.tamanio()):
+#     print (c.mover_al_final())
 
-print('Tamaño', c.tamanio())
+# print('Tamaño', c.tamanio())
 
 
