@@ -1,94 +1,165 @@
+def criterio(dato, campo=None):
+    dic = {}
+    if(hasattr(dato, '__dict__')):
+        dic = dato.__dict__
+    if(campo is None or campo not in dic):
+        return dato
+    else:
+        return dic[campo]
 
-
-class nodoLista(object):
+class nodoLista():
     info, sig = None, None
 
 
-class Lista(object):
-
+class Lista():
 
     def __init__(self):
         self.__inicio = None
         self.__tamanio = 0
 
 
-    def insertar(self, dato):
+    def insertar(self, dato, campo=None):
         nodo = nodoLista()
         nodo.info = dato
 
-        if (self.__inicio is None) or (nodo.info < self.__inicio.info) :
+        if(self.__inicio is None or criterio(nodo.info, campo) < criterio(self.__inicio.info, campo)):
             nodo.sig = self.__inicio
             self.__inicio = nodo
         else:
             anterior = self.__inicio
             actual = self.__inicio.sig
-            while(actual is not None and nodo.info > actual.info):
+            while(actual is not None and criterio(nodo.info, campo) > criterio(actual.info, campo)):
                 anterior = anterior.sig
                 actual = actual.sig
-            
-            #No importa si es el ultimo nodo o no
+
             nodo.sig = actual
             anterior.sig = nodo
 
         self.__tamanio += 1
 
-    def lista_Vacia(self):
+    def lista_vacia(self):
         return self.__inicio is None
 
     def tamanio(self):
         return self.__tamanio
 
     def barrido(self):
-
         aux = self.__inicio
-        while (aux is not None):
-            print (aux.info)
+        while(aux is not None):
+            print(aux.info)
             aux = aux.sig
-    
-    def busqueda(self, buscado):
+
+    def busqueda(self, buscado, campo=None):
         pos = None
         aux = self.__inicio
-        while (aux is not None and pos is None):
-            if(aux.info == buscado):
+        while(aux is not None and pos is None):
+            if(criterio(aux.info, campo) == buscado):
                 pos = aux
             aux = aux.sig
 
-    def eliminar(self, clave):
+        return pos
+
+    def eliminar(self, clave, campo=None):
         dato = None
-        if(self.__inicio.info == clave):
+        if(criterio(self.__inicio.info, campo) == clave):
             dato = self.__inicio.info
             self.__inicio = self.__inicio.sig
         else:
             anterior = self.__inicio
             actual = self.__inicio.sig
-            while(actual is not None and actual.info < clave):
+            while(actual is not None and criterio(actual.info, campo) != clave):
                 anterior = anterior.sig
                 actual = actual.sig
 
-            if (actual is not None and actual.info == clave):
+            if(actual is not None):
                 dato = actual.info
                 anterior.sig = actual.sig
+
         return dato
 
-    def modificar(self, viejo, nuevo):
-        pos = self.eliminar(viejo)
-        if pos is not None:
-            self.insertar(nuevo)
+    def obtener_elemento(self, indice):
+        if(indice <= self.__tamanio-1 and indice >= 0):
+            aux = self.__inicio
+            for i in range(indice):
+                aux = aux.sig
+            return aux.info            
+        else:
+            return None
+
+
+# cadena = 'hola'
+# cadena.startswith('C')
+# print(cadena[0])
+
+class Persona:
+
+    def __init__(self, apellido, nombre, dni):
+        self.apellido = apellido
+        self.nombre = nombre
+        self.dni = dni
+        self.telefono = None
+    
+    def __str__(self):
+        return f"{self.apellido} {self.nombre}, {self.dni}"
+
+
+
+# p = Persona('A', 'A', 3)
+# num = 45
+# cadena = 'hola'
+# print(criterio(p, 'mail'))
+# print(criterio(p, 'apellido'))
+# print(criterio(num))
+# print(criterio(num, 'tel'))
+# print(criterio(cadena, 'mail'))
+# print(criterio(cadena))
 
 
 l = Lista()
 
-from random import randint
+# l.insertar(Persona('A', 'A', 7), 'nombre')
+# l.insertar(Persona('C', 'C', 2), 'nombre')
+# l.insertar(Persona('A', 'A', 11), 'nombre')
+# l.insertar(Persona('B', 'Z', 1), 'nombre')
+# l.insertar(Persona('B', 'H', 10), 'nombre')
+# l.insertar(Persona('B', 'X', 4), 'nombre')
 
-l.insertar(10)
-l.insertar(7)
-l.insertar(13)
-l.insertar(15)
+# Persona dni = 5 nombre = G
+
+
+
+
+# l.eliminar('A', 'nombre')
+l.insertar(11)
 l.insertar(8)
-l.insertar(1)
+l.insertar(9)
+l.insertar(10)
+l.insertar(5)
 
-l.modificar(7, 19)
+# print(l.obtener_elemento(0))
+# print(l.obtener_elemento(-2))
+# print(l.obtener_elemento(5))
+# print(l.obtener_elemento(8))
+
+pos = l.eliminar(8)
+# if pos is not None:
+#     l.insertar(18)
+
+
+# print(l.eliminar(5))
+# print(l.eliminar(7))
+# print(l.eliminar(10))
+
 
 l.barrido()
 
+# print(l.busqueda(7).info)
+# print(l.busqueda(2))
 
+
+# vocales = ['A', 'E',.....]
+
+# for vocal in vocale:
+#     aux = l.eliminar(vocal)
+#     while(aux is not None):
+#         aux = l.eliminar(vocal)
